@@ -1,0 +1,152 @@
+import java.util.Scanner;
+
+public class AutoInventoryCmdLineInterface
+{
+	private String filename;
+	
+	AutoInventoryCmdLineInterface()
+	{
+		filename = "invalid";
+	}
+	
+	private void promptUser( String[] args)
+	{
+		int command = 0 ;
+		do{// Initial prompt and repeats until "-1" is input
+			System.out.println("-----------------------------------------------------------");
+			System.out.println("Available commands, please type the coressponding number");
+			System.out.println("Display Inventory[0]\nSearch[1]\nExit System[-1]\n");
+			System.out.print("Command:");
+			Scanner input = new Scanner ( System.in );
+			command = input.nextInt();
+			
+			if (command==0)
+			{//display inventory
+				AutoInventory.makeArray( command, args);
+			}
+			if (command==1)
+			{//search based on user
+				System.out.println("-----------------------------------------------------------");
+				System.out.println("Searchable fields");
+				System.out.println("Make[0]\nModel[1]\nYear[2]\nCondition[3]\nMileage[4]\nPrice[5]\nVin[6]");
+				System.out.print("Command or type -1 to exit:");
+				command = input.nextInt();
+				if (command == -1)
+				{
+					break;
+				}
+				if (command >=7)
+				{//error if wrong value
+					System.out.println("Invalid choice!");
+				}
+				AutoInventory.makeArray( (command +1 ) , args);//command adds 1 so that full inventory is not displayed
+				System.out.println("-----------------------------------------------------------");
+			}
+			}while( command!=-1);
+	}
+	
+	/*-----------
+	 * Sub_menu get string
+	 */
+	public String getString()
+	{
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter search term:");
+		return input.nextLine();
+	}
+	
+	public int getInt()
+	{
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter search term:");
+		return input.nextInt();
+	}
+	public String getComparator()
+	{
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter search term:");
+		String invalue = input.next();
+		 if ( !invalue.equals("=") && !invalue.equals("<") &&!invalue.equals(">"))
+		 {//error case
+			 System.out.println("Invalid choice! Try again.");
+		 }
+		 return invalue;
+	}
+		/*---------------------------------------
+		  * The method autoPrint is used to print a full 2d array.
+		  * This is performed by printing each column in the first row 
+		  * then moves to the second row and repeats until there are no more rows
+		  * 
+		  * Precondition: The 2d array, String [][] args, can be of any length and width
+		  * -----------------------------------------------------------------
+		  */
+		   public void autoPrint(String [][] args)
+		   {
+		   for (int n = 0; n < args.length; n++ )
+		   {// The outer loop controls the position of row
+			   for ( int i = 0; i < args[0].length; i++)
+			   {//The inner loop controls the position of the column 
+				   System.out.print(args[n][i].trim() + "      \t");
+			   }
+			   System.out.println("");
+		   }
+		   }
+		 /*--------------------------------------------
+		  * The method printRow prints a single row from a 2d array. It uses an integer as an anchor.
+		  * This method doesn't change rows.
+		  * 
+		  * Preconditions:  The integer, r, that corresponds to the row to print out.
+		  * 				The 2d array of type, String [][] args, can be of any length.
+		  * ----------------------------------------------------------------------------
+		  */
+		   public void printRow(int r, String[][] args)
+		   {
+			   for (int n = 0; n< args[0].length ;n++ )
+			   {//the for loop controls the position of the column within a row
+				   System.out.print(args[r][n].trim() + "      \t");
+			   }
+			   System.out.println("");
+		   }
+		   
+		  /*--------------------------------------------
+		   * The method printArray takes in an array of strings and prints out it's elements
+		   * 
+		   * Preconditions:	An array of type strings, Strings[]args 
+		   * -------------------------------------------------------
+		   */
+		   public void printArray(String[]args)
+		   {
+			   for (int n = 0; n < args.length ; n++)
+			   {
+				   System.out.print(args[n].trim() + "      \t");
+			   }
+			   System.out.println("");
+					   
+		   }
+		   
+		   /*--------------------------------------
+			* The method printHyphens prints hyphens or dashes based on the input an input array of strings.
+			* This is used to make visualization easier for the user.
+			* 
+			* Preconditions: An array of type strings, Strings[]args
+			*/
+			public static void printHyphens(String[] args)
+			{
+				for (int i = 0; i < args.length; i++ )
+				{//outer loop repeats for the row length of the string array
+					for (int n =0; n < args[i].length(); n++)
+					{//inner loop repeats for each element length in the string array
+						System.out.print("-");
+					}
+					System.out.print("     \t");
+				}
+				System.out.println();   
+			}	
+		
+}
+	
+	/*---------------------
+	 * 
+	 * 
+	 */
+
