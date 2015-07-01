@@ -1,0 +1,39 @@
+import java.util.ArrayList;
+
+public class AutoInventory {
+	
+	ArrayList<ArrayList<String>> data;
+	//String[][] data;
+	
+	public static final int conditionIndex = 0;
+	public static final int makeIndex = 1;
+	public etc...
+	
+	public AutoInventory(String filepath){
+		data = new ArrayList<ArrayList<String>>();
+		for (int i = 0; i < table_width; i++){
+			data.add(new ArrayList<String>());
+		}
+		with open(filepath, 'r') as fh:
+			for line in fh:
+				tokens = line.split(';');
+				for (int i = 0; i < tokens.length; i++){
+					data[i].add(token[i])
+				}
+		
+	}
+	
+	public String[] getRow(int index){
+		String[] sa = String[data.length];
+		for (int i = 0; i < data.length; i++){
+			sa[i] = data[i][index];
+		}
+		return sa;
+	}
+	
+	public String[][] getInventory(){
+		return null;
+	}
+
+
+}
